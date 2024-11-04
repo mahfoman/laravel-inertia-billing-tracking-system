@@ -17,34 +17,27 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Admin User',
+                'role_id' => 1,
                 'email' => 'admin@example.com',
                 'password' => Hash::make('password'),
-                'ip_address' => '192.168.1.1'
             ],
             [
                 'name' => 'Employee User',
+                'role_id' => 2,
                 'email' => 'employee@example.com',
                 'password' => Hash::make('password'),
-                'ip_address' => '192.168.1.2'
-            ]
-        ]);
-
-        DB::table('users')->insert([
+            ],
             [
                 'name' => 'John Doe',
+                'role_id' => 3,
                 'email' => 'john@example.com',
-                'phone' => '123-456-7890',
-                'address' => "204 east kaful",
-                'floor' => "2nd floor",
-                'ip_address' => '192.168.1.3'
+                'password' => ''
             ],
             [
                 'name' => 'Jane Smith',
+                'role_id' => 3,
                 'email' => 'jane@example.com',
-                'phone' => '987-654-3210',
-                'address' => "413 east kaful",
-                'floor' => "2nd floor",
-                'ip_address' => '192.168.1.4'
+                'password' => ''
             ]
         ]);
     }
