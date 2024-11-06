@@ -24,6 +24,10 @@ class IpAddressController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'ip_address' => 'required|string|max:255',
+        ]);
+
         $ipAddress = new IpAddress($request->all());
         $ipAddress->save();
         return redirect()->route('ip_addresses.index');
@@ -36,6 +40,10 @@ class IpAddressController extends Controller
 
     public function update(Request $request, IpAddress $ipAddress)
     {
+        $request->validate([
+            'ip_address' => 'required|string|max:255',
+        ]);
+
         $ipAddress->update($request->all());
         return redirect()->route('ip_addresses.index');
     }

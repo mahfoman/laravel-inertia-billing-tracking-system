@@ -1,12 +1,12 @@
 <template>
     <div v-show="isOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
         <transition
-            enter-active-class="transition transform ease-in duration-300"
-            enter-from-class="opacity-0 translate-y-10"
+            enter-active-class="transition transform ease-out duration-300"
+            enter-from-class="opacity-0 -translate-y-10"
             enter-to-class="opacity-100 translate-y-0"
-            leave-active-class="transition transform ease-out duration-200"
+            leave-active-class="transition transform ease-in duration-200"
             leave-from-class="opacity-100 translate-y-0"
-            leave-to-class="opacity-0 translate-y-10"
+            leave-to-class="opacity-0 -translate-y-10"
         >
             <div
                 v-show="isOpen"

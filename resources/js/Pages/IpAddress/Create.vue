@@ -7,8 +7,15 @@
                 <!-- Role Name Input -->
                 <div class="mb-4">
                     <label for="role-name" class="block text-gray-700 font-semibold mb-2">IP</label>
-                    <input type="text" id="ip_address" name="ip_address" v-model="form.ip_address" required
-                           class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    <input type="text"
+                           id="ip_address"
+                           name="ip_address"
+                           v-model="form.ip_address"
+                           class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                           :class="{'border-red-500': errors.name}"
+                    >
+                    <!-- Error Message for Role Name -->
+                    <p v-if="errors.ip_address" class="text-red-500 text-xs mt-1">{{ errors.ip_address }}</p>
                 </div>
 
                 <!-- Submit Button -->
@@ -37,6 +44,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    errors: {
+        type: Object,
+        default: null,
+    },
 });
 
 const form = useForm({
@@ -44,8 +55,21 @@ const form = useForm({
 });
 
 const submit = () => (props.isUpdating ? updateIP() : addIP());
-const addIP = () => form.post("/ip_addresses");
-const updateIP = () => form.put(`/ip_addresses/${props.ipAddress.id}`);
+const addIP = () => {
+    // form.post("/ip_addresses");
+    form.post('/ip_addresses', {
+        onError: (errors) => {
+            //console.log(errors) // Logs any validation errors
+        }
+    })
+};
+const updateIP = () => {
+    form.put(`/ip_addresses/${props.ipAddress.id}`, {
+        onError: (errors) => {
+            //console.log(errors) // Logs any validation errors
+        }
+    });
+}
 
 onMounted(() => {
     if (props.ipAddress && Object.keys(props.ipAddress).length > 0) {
