@@ -17,6 +17,7 @@
                             class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                         Submit
                     </button>
+                    <Link :href="'/ip_addresses'" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-red-700 ml-4">Cancel</Link>
                 </div>
             </form>
         </div>

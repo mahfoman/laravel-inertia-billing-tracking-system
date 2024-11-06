@@ -29,11 +29,24 @@
                 </tbody>
             </table>
         </div>
+        <!-- Confirm Dialog Component -->
+        <ConfirmDialog
+            :isOpen="showDeleteModal"
+            title="Delete IP Address"
+            message="Are you sure you want to delete this address?"
+            @close="showDeleteModal = false"
+            @confirm="confirmDelete"
+        />
     </main>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { Link, useForm } from "@inertiajs/vue3";
+import ConfirmDialog from '@/Components/ConfirmDialog.vue'
+
+const showDeleteModal = ref(false)
+const ipAddressToDelete = ref(null)
 
 defineProps({
     ips: {
@@ -45,6 +58,13 @@ defineProps({
 const form = useForm({});
 
 const deleteIP = (id) => {
-    form.delete(`ip_addresses/${id}`);
+    //form.delete(`ip_addresses/${id}`);
+    ipAddressToDelete.value = id
+    showDeleteModal.value = true
 };
+
+const confirmDelete = () => {
+    form.delete(`ip_addresses/${ipAddressToDelete.value}`);
+    showDeleteModal.value = false
+}
 </script>
