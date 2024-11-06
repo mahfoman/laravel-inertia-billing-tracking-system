@@ -15,4 +15,9 @@ class RoleController extends Controller
             'roles' => $roles
         ]);
     }
+
+    public function create()
+    {
+        return Inertia::render('Roles/Create');
+    }
 }
