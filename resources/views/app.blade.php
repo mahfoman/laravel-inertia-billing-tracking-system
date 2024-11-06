@@ -22,13 +22,13 @@
         <a href="#" class="text-lg font-semibold">Billing Tracking</a>
         <ul class="flex space-x-4">
             <li><a href="#" class="hover:underline">Home</a></li>
-            <li><a href="#" class="hover:underline">Companies</a></li>
-            <li><a href="#" class="hover:underline">Users</a></li>
-            <li><a href="#" class="hover:underline">Billings</a></li>
+            <li><a href="/companies" class="hover:underline">Companies</a></li>
+            <li><a href="/users" class="hover:underline">Users</a></li>
+            <li><a href="/billings" class="hover:underline">Billings</a></li>
             <li><a href="/roles" class="hover:underline">Roles</a></li>
             <li><a href="/ip_addresses" class="hover:underline">IP Addresses</a></li>
-            <li><a href="#" class="hover:underline">Packages</a></li>
-            <li><a href="#" class="hover:underline">Logout</a></li>
+            <li><a href="/packages" class="hover:underline">Packages</a></li>
+            <li><a href="/logout" class="hover:underline">Logout</a></li>
         </ul>
     </nav>
 </header>
