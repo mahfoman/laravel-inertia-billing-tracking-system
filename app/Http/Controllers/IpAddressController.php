@@ -25,7 +25,7 @@ class IpAddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ip_address' => 'required|string|max:255',
+            'ip_address' => 'required|ip|string|max:255',
         ]);
 
         $ipAddress = new IpAddress($request->all());
@@ -41,7 +41,7 @@ class IpAddressController extends Controller
     public function update(Request $request, IpAddress $ipAddress)
     {
         $request->validate([
-            'ip_address' => 'required|string|max:255',
+            'ip_address' => 'required|ip|string|max:255',
         ]);
 
         $ipAddress->update($request->all());
