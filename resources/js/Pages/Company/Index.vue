@@ -3,7 +3,7 @@
     <main class="flex-grow bg-gray-100 py-8">
         <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold text-gray-800">IP Addresses</h2>
+                <h2 class="text-2xl font-bold text-gray-800">Companies</h2>
                 <Link href="/companies/create" class="bg-gray-600 text-white px-3 py-2 font-semibold text-sm rounded hover:bg-gray-700">
                     <i class="fas fa-plus mr-2"></i>Add Company
                 </Link>
