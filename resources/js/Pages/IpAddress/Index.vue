@@ -4,7 +4,7 @@
         <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">IP Addresses</h2>
-                <Link href="/ip_addresses/create" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <Link href="/ip_addresses/create" class="bg-gray-600 text-white px-3 py-2 font-semibold text-sm rounded hover:bg-gray-700">
                     <i class="fas fa-plus mr-2"></i>Add IP Address
                 </Link>
             </div>
@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 <!-- Example rows, replace with dynamic content as needed -->
-                <tr v-for="ip in ips" :key="ip.id">
+                <tr v-for="ip in ips.data" :key="ip.id">
                     <td class="py-2 px-4 border-b">{{ ip.id }}</td>
                     <td class="py-2 px-4 border-b">{{ ip.ip_address }}</td>
                     <td class="py-2 px-4 border-b">
@@ -28,7 +28,10 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="flex justify-center"><Pagination :links="ips.links" class="mt-6" /></div>
+
         </div>
+
         <!-- Confirm Dialog Component -->
         <ConfirmDialog
             :isOpen="showDeleteModal"
@@ -44,13 +47,14 @@
 import { ref } from 'vue'
 import { Link, useForm } from "@inertiajs/vue3";
 import ConfirmDialog from '@/Components/ConfirmDialog.vue'
+import Pagination from "../../Components/Pagination.vue";
 
 const showDeleteModal = ref(false)
 const ipAddressToDelete = ref(null)
 
 defineProps({
     ips: {
-        type: Array,
+        type: Object,
         default: () => [],
     },
 });

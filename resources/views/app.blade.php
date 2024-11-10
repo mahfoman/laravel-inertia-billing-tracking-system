@@ -17,7 +17,7 @@
 <body class="flex flex-col min-h-screen">
 
 <!-- Header Section -->
-<header class="bg-blue-600 text-white p-4">
+<header class="bg-gray-600 text-white p-4">
     <nav class="max-w-4xl mx-auto flex justify-between">
         <a href="#" class="text-lg font-semibold">Billing Tracking</a>
         <ul class="flex space-x-4">
@@ -36,7 +36,7 @@
 @inertia
 
 <!-- Footer Section -->
-<footer class="bg-blue-600 text-white p-4">
+<footer class="bg-gray-600 text-white p-4">
     <div class="max-w-4xl mx-auto text-center">
         <p>&copy; {{ now()->year }} Billing Tracking. All rights reserved.</p>
     </div>

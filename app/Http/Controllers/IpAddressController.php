@@ -11,7 +11,9 @@ class IpAddressController extends Controller
     //
     public function index()
     {
-        $ips = IpAddress::all();
+
+        $ips = IpAddress::paginate(10);
+//        $ips = IpAddress::
         return Inertia::render('IpAddress/Index', [
             'ips' => $ips
         ]);
