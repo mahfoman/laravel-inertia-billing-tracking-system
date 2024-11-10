@@ -10,14 +10,44 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
-        return Inertia::render('Roles/Index', [
-            'roles' => $roles
-        ]);
+        $roles = Role::paginate(10);
+        return Inertia::render('Role/Index', compact('roles'));
     }
 
     public function create()
     {
-        return Inertia::render('Roles/Create');
+        return Inertia::render('Role/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        Role::create($request->all());
+        return redirect()->route('roles.index');
+    }
+
+
+    public function edit(Role $role)
+    {
+        return Inertia::render('Role/Create', ['role' => $role, 'isUpdating' => true]);
+    }
+
+
+    public function update(Request $request, Role $role)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $role->update($request->all());
+        return redirect()->route('roles.edit', $role);
+    }
+
+
+    public function destroy(Role $role)
+    {
+        $role->delete();
+        return redirect()->route('roles.index');
     }
 }
