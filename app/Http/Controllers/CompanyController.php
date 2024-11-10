@@ -79,7 +79,6 @@ class CompanyController extends Controller
         }
 
         $request->logo = $fileName ?? $company->logo;
-        //dd($request->all());
 
         $company->update([
             'name' => $request->name,
@@ -94,8 +93,8 @@ class CompanyController extends Controller
 
     public function destroy(Company $company)
     {
-        if ( $company->logo &&file_exists(public_path('companies/' . $company->logo))) {
-            File::delete(public_path('companies/' . $company->logo));
+        if ( $company->logo &&file_exists(public_path('storage/companies/' . $company->logo))) {
+            File::delete(public_path('storage/companies/' . $company->logo));
         }
         $company->delete();
         return redirect()->back();
