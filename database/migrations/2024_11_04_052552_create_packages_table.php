@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('set null');
             $table->string('name');             // Package name, e.g., "Basic", "Premium"
             $table->decimal('price', 8, 2);     // Price of the package
             $table->string('speed');           // Internet speed (e.g., in Mbps)

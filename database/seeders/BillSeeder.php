@@ -15,6 +15,7 @@ class BillSeeder extends Seeder
     {
         DB::table('bills')->insert([
             [
+                'company_id' => 1,
                 'user_id' => 3,
                 'ip_address_id' => 1,
                 'package_id' => 1,
@@ -26,6 +27,7 @@ class BillSeeder extends Seeder
                 'paid_on' => '2024-01-01'
             ],
             [
+                'company_id' => 2,
                 'user_id' => 4,
                 'ip_address_id' => 2,
                 'package_id' => 1,
