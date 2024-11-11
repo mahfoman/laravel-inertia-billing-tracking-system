@@ -16,6 +16,7 @@ class BillSeeder extends Seeder
         DB::table('bills')->insert([
             [
                 'user_id' => 3,
+                'ip_address_id' => 1,
                 'package_id' => 1,
                 'billing_month' => '2024-01',
                 'package_name' => "Basic",
@@ -26,6 +27,7 @@ class BillSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
+                'ip_address_id' => 2,
                 'package_id' => 1,
                 'billing_month' => '2024-01',
                 'package_name' => "Basic",

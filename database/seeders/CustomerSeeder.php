@@ -20,14 +20,12 @@ class CustomerSeeder extends Seeder
                 'phone' => '555-555-5555',
                 'address' => '123 Main St',
                 'floor' => '2nd Floor',
-                'ip_address_id' => 1,
             ],
             [
                 'user_id' => 4,
                 'phone' => '555-555-4555',
                 'address' => '234 Main St',
                 'floor' => '3rd Floor',
-                'ip_address_id' => 2,
             ],
         ]);
     }
