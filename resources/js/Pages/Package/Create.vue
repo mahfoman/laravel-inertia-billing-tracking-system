@@ -1,9 +1,23 @@
 <template>
 
-    <main class="flex-grow bg-gray-100 py-8">
+    <main class="flex-grow py-8">
         <div class="container mx-auto max-w-4xl p-6 bg-white shadow-lg rounded-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">{{props.isUpdating ? 'Edit' : 'Add'}} Package</h2>
             <form @submit.prevent="submit">
+                <div class="mb-4">
+                    <label for="company-name" class="block text-gray-700 font-semibold mb-2">Company</label>
+                    <select
+                        name="company_id"
+                        id="company_id"
+                        v-model="form.company_id"
+                        class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        :class="{'border-red-500': errors.company_id}"
+                    >
+                        <option v-for="company in companies" :value="company.id">{{ company.name }}</option>
+                    </select>
+                    <!-- Error Message -->
+                    <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id }}</p>
+                </div>
                 <!-- Name Input -->
                 <div class="mb-4">
                     <label for="role-name" class="block text-gray-700 font-semibold mb-2">Name</label>
@@ -75,6 +89,10 @@ const props = defineProps({
         type: Object,
         default: null,
     },
+    companies: {
+        type: Object,
+        default: null,
+    },
     isUpdating: {
         type: Boolean,
         default: false,
@@ -86,10 +104,12 @@ const props = defineProps({
 });
 
 const form = useForm({
+    company_id : null,
     name: "",
     price: "",
     speed: "",
     description: "",
+    _method: (props.isUpdating ? 'PUT' : 'POST'),
 });
 
 onMounted(() => {
@@ -98,12 +118,15 @@ onMounted(() => {
         form.price = props.package.price;
         form.speed = props.package.speed;
         form.description = props.package.description;
+        form.company_id = props.package.company_id;
     } else {
         form.name = "";
         form.price = "";
         form.speed = "";
         form.description = "";
+        form.company_id = null;
     }
+
 });
 
 const submit = () => (props.isUpdating ? updateResource() : addResource());

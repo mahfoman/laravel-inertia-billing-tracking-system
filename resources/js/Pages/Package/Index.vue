@@ -1,6 +1,6 @@
 <template>
 
-    <main class="flex-grow bg-gray-100 py-8">
+    <main class="flex-grow py-8">
         <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">All Packages</h2>
@@ -12,7 +12,8 @@
                 <thead>
                 <tr>
                     <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">ID</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Name</th>
+                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Company Name</th>
+                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Package Name</th>
                     <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Price</th>
                     <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Speed (MB) </th>
                     <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Action</th>
@@ -22,6 +23,7 @@
                 <!-- Example rows, replace with dynamic content as needed -->
                 <tr v-for="packageItem in packages.data" :key="packageItem.id">
                     <td class="py-2 px-4 border-b">{{ packageItem.id }}</td>
+                    <td class="py-2 px-4 border-b">{{ packageItem.company.name }}</td>
                     <td class="py-2 px-4 border-b">{{ packageItem.name }}</td>
                     <td class="py-2 px-4 border-b">{{ packageItem.price }}TK.</td>
                     <td class="py-2 px-4 border-b">{{ packageItem.speed }}</td>
