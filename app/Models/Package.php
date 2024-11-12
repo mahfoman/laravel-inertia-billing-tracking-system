@@ -9,5 +9,9 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'price', 'speed', 'description'];
+    protected $fillable = ['company_id','name', 'price', 'speed', 'description'];
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 }

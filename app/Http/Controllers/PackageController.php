@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,22 +11,24 @@ class PackageController extends Controller
 {
     public function index()
     {
-        $packages = Package::paginate(10);
+        $packages = Package::with('company')->paginate(10);
         return Inertia::render('Package/Index', compact('packages'));
     }
 
     public function create()
     {
-        return Inertia::render('Package/Create');
+        $companies = Company::all();
+        return Inertia::render('Package/Create', compact('companies'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|integer',
+            'price' => 'required|decimal',
             'speed' => 'required|integer',
             'description' => 'nullable|string|max:255',
+            'company_id' => 'required|integer',
         ]);
         Package::create($request->all());
         return redirect()->route('packages.index');
@@ -33,7 +36,10 @@ class PackageController extends Controller
 
     public function edit(Package $package)
     {
-        return Inertia::render('Package/Create', ['package' => $package, 'isUpdating' => true]);
+        //$package->load('company');
+//        dd($package);
+        $companies = Company::all();
+        return Inertia::render('Package/Create', ['package' => $package, 'isUpdating' => true, 'companies' => $companies]);
     }
 
 
@@ -41,9 +47,10 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|integer',
+            'price' => 'required|decimal:2',
             'speed' => 'required|integer',
             'description' => 'nullable|string|max:255',
+            'company_id' => 'required|integer',
         ]);
         $package->update($request->all());
         return redirect()->route('packages.edit', $package);
