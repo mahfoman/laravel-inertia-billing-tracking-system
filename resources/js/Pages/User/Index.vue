@@ -1,6 +1,6 @@
 <template>
 
-    <main class="flex-grow bg-gray-100 py-8">
+    <main class="flex-grow py-8">
         <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">All Users</h2>
