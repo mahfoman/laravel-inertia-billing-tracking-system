@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             PackageSeeder::class,
             BillSeeder::class,
-            PackageHistorySeeder::class,
+            CompanyUserSeeder::class
         ]);
     }
 }
