@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\IpAddressController;
 use App\Http\Controllers\PackageController;
@@ -16,3 +17,4 @@ Route::resource('users', UserController::class);
 Route::resource('ip_addresses', IpAddressController::class);
 Route::resource('companies', CompanyController::class);
 Route::resource('packages', PackageController::class);
+Route::resource('bills', BillController::class);

@@ -1,122 +1,147 @@
 <template>
 
-    <main class="flex-grow py-8">
+    <main class="flex-grow py-8 mb-10">
         <div class="container mx-auto max-w-4xl p-6 bg-white shadow-lg rounded-lg">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">{{props.isUpdating ? 'Edit' : 'Add'}} User</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">{{props.isUpdating ? 'Edit' : 'Add'}} Bill</h2>
             <form @submit.prevent="submit">
-                <!-- Name Input -->
-                <div class="mb-4">
-                    <label for="role-name" class="block text-gray-700 font-semibold mb-2">Role</label>
-                    <select
-                        name="role_id"
-                        id="role_id"
-                        v-model="form.role_id"
-                        class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                        :class="{'border-red-500': errors.role_id}"
-                    >
-                        <option v-for="role in roles" :value="role.id">{{ role.name }}</option>
-                    </select>
-                    <!-- Error Message -->
-                    <p v-if="errors.role_id" class="text-red-500 text-xs mt-1">{{ errors.role_id }}</p>
-                </div>
-                <div class="mb-4" v-if="showNotCustomerFields">
-                    <label for="company-name" class="block text-gray-700 font-semibold mb-2">Company</label>
-                    <select
-                        name="company_id"
-                        id="company_id"
-                        v-model="form.company_id"
-                        class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                        :class="{'border-red-500': errors.company_id}"
-                    >
-                        <option v-for="company in companies" :value="company.id">{{ company.name }}</option>
-                    </select>
-                    <!-- Error Message -->
-                    <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id }}</p>
-                </div>
-                <!-- Name Input -->
-                <div class="mb-4">
-                    <label for="role-name" class="block text-gray-700 font-semibold mb-2">Name</label>
-                    <input type="text"
-                           id="name"
-                           name="name"
-                           v-model="form.name"
-                           class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                           :class="{'border-red-500': errors.name}"
-                    >
-                    <!-- Error Message -->
-                    <p v-if="errors.name" class="text-red-500 text-xs mt-1">{{ errors.name }}</p>
-                </div>
-                <div class="mb-4">
-                    <label for="role-name" class="block text-gray-700 font-semibold mb-2">Email</label>
-                    <input type="text"
-                           id="email"
-                           name="email"
-                           v-model="form.email"
-                           class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                           :class="{'border-red-500': errors.email}"
-                    >
-                    <!-- Error Message -->
-                    <p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
-                </div>
-                <div class="mb-4">
-                    <label for="role-name" class="block text-gray-700 font-semibold mb-2">Password</label>
-                    <input type="password"
-                           id="password"
-                           name="password"
-                           v-model="form.password"
-                           class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                           :class="{'border-red-500': errors.password}"
-                    >
-                    <!-- Error Message -->
-                    <p v-if="errors.password" class="text-red-500 text-xs mt-1">{{ errors.password }}</p>
-                </div>
-
-                <!-- Additional Fields for Customers -->
-                <div v-if="showCustomerFields">
-                    <div class="mb-4">
-                        <label for="address" class="block text-gray-700 font-semibold mb-2">Address</label>
-                        <input type="text"
-                               id="address"
-                               name="address"
-                               v-model="form.address"
-                               class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                               :class="{'border-red-500': errors.address}"
+                <div class="flex flex-wrap -mx-2">
+                    <!-- Company Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="company_id" class="block text-gray-700 font-semibold mb-2">Company</label>
+                        <select
+                            name="company_id"
+                            id="company_id"
+                            v-model="form.company_id"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.company_id}"
                         >
-                        <p v-if="errors.address" class="text-red-500 text-xs mt-1">{{ errors.address }}</p>
+                            <option v-for="company in companies" :value="company.id">{{ company.name }}</option>
+                        </select>
+                        <p v-if="errors.company_id" class="text-red-500 text-xs mt-1">{{ errors.company_id }}</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="phone" class="block text-gray-700 font-semibold mb-2">Phone</label>
-                        <input type="tel"
-                               id="phone"
-                               name="phone"
-                               v-model="form.phone"
-                               class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                               :class="{'border-red-500': errors.phone}"
+                    <!-- Customer Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="user_id" class="block text-gray-700 font-semibold mb-2">Customer</label>
+                        <select
+                            name="user_id"
+                            id="user_id"
+                            v-model="form.user_id"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.user_id}"
                         >
-                        <p v-if="errors.phone" class="text-red-500 text-xs mt-1">{{ errors.phone }}</p>
+                            <option v-for="user in users" :value="user.id">{{ user.name }}</option>
+                        </select>
+                        <p v-if="errors.user_id" class="text-red-500 text-xs mt-1">{{ errors.user_id }}</p>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="floor" class="block text-gray-700 font-semibold mb-2">Floor</label>
-                        <input type="text"
-                               id="floor"
-                               name="floor"
-                               v-model="form.floor"
-                               class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                               :class="{'border-red-500': errors.floor}"
+                    <!-- Package Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="package_id" class="block text-gray-700 font-semibold mb-2">Package</label>
+                        <select
+                            name="package_id"
+                            id="package_id"
+                            v-model="form.package_id"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.package_id}"
                         >
-                        <p v-if="errors.floor" class="text-red-500 text-xs mt-1">{{ errors.floor }}</p>
+                            <option v-for="packageItem in packages" :value="packageItem.id">{{ packageItem.name }}</option>
+                        </select>
+                        <p v-if="errors.package_id" class="text-red-500 text-xs mt-1">{{ errors.package_id }}</p>
+                    </div>
+
+                    <!-- IP Address Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="ip_address_id" class="block text-gray-700 font-semibold mb-2">IP Address</label>
+                        <select
+                            name="ip_address_id"
+                            id="ip_address_id"
+                            v-model="form.ip_address_id"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.ip_address_id}"
+                        >
+                            <option v-for="ip_address in ip_addresses" :value="ip_address.id">{{ ip_address.ip_address }}</option>
+                        </select>
+                        <p v-if="errors.ip_address_id" class="text-red-500 text-xs mt-1">{{ errors.ip_address_id }}</p>
+                    </div>
+
+                    <!-- Billing Month Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="billing_month" class="block text-gray-700 font-semibold mb-2">Billing Month</label>
+                        <select
+                            name="billing_month"
+                            id="billing_month"
+                            v-model="form.billing_month"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.billing_month}"
+                        >
+                            <option v-for="month in months" :value="month">{{ month }}</option>
+                        </select>
+                        <p v-if="errors.billing_month" class="text-red-500 text-xs mt-1">{{ errors.billing_month }}</p>
+                    </div>
+
+                    <!-- Package Name Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="package_name" class="block text-gray-700 font-semibold mb-2">Package</label>
+                        <input type="text"
+                               id="package_name"
+                               name="package_name"
+                               readonly
+                               v-model="form.package_name"
+                               class="border bg-gray-100 border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                               :class="{'border-red-500': errors.package_name}"
+                        >
+                    </div>
+
+                    <!-- Amount Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="amount" class="block text-gray-700 font-semibold mb-2">Amount</label>
+                        <input type="text"
+                               id="amount"
+                               name="amount"
+                               readonly
+                               v-model="form.amount"
+                               class="border bg-gray-100 border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                               :class="{'border-red-500': errors.amount}"
+                        >
+                    </div>
+
+                    <!-- Speed Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="speed" class="block text-gray-700 font-semibold mb-2">Speed (MB)</label>
+                        <input type="text"
+                               id="speed"
+                               name="speed"
+                               readonly
+                               v-model="form.speed"
+                               class="border bg-gray-100 border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                               :class="{'border-red-500': errors.speed}"
+                        >
+                    </div>
+
+                    <!-- Billing Status Input -->
+                    <div class="w-full md:w-1/2 px-2 mb-4">
+                        <label for="status" class="block text-gray-700 font-semibold mb-2">Billing Status</label>
+                        <select
+                            name="status"
+                            id="status"
+                            v-model="form.status"
+                            class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            :class="{'border-red-500': errors.status}"
+                        >
+                            <option value="due" selected="selected">Due</option>
+                            <option value="paid">Paid</option>
+                        </select>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div>
+                <div class="flex items-center mt-4">
                     <button type="submit"
                             class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                         Submit
                     </button>
-                    <Link :href="'/users'" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-red-700 ml-4">Cancel</Link>
+                    <Link :href="'/bills'" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-red-700 ml-4">Cancel</Link>
                 </div>
             </form>
         </div>
@@ -128,21 +153,29 @@ import { Link, useForm } from "@inertiajs/vue3";
 import { ref, onMounted, watch } from "vue";
 
 const props = defineProps({
-    user: {
-        type: Object,
-        default: null,
-        customer: {
-            type: Object,
-            default: null
-        }
-    },
-    roles: {
+    bill: {
         type: Object,
         default: null,
     },
     companies: {
         type: Object,
         default: null,
+    },
+    users: {
+        type: Object,
+        default: null,
+    },
+    packages: {
+        type: Object,
+        default: null,
+    },
+    ip_addresses: {
+        type: Object,
+        default: null,
+    },
+    months :{
+        type: Array,
+        default: null
     },
     isUpdating: {
         type: Boolean,
@@ -155,71 +188,65 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: "",
     company_id: null,
-    role_id: null,
-    email: "",
-    password: "",
-    address: "",
-    phone: "",
-    floor: "",
+    package_id: null,
+    user_id: null,
+    ip_address_id: null,
+    billing_month: "",
+    package_name: "",
+    amount: "",
+    speed: "",
+    status: "",
     _method: (props.isUpdating ? 'PUT' : 'POST'),
 });
 
 const showCustomerFields = ref(false);
-const showNotCustomerFields = ref(false);
 
 onMounted(() => {
-    if (props.user && Object.keys(props.user).length > 0) {
-        form.name = props.user.name;
-        form.email = props.user.email;
-        form.role_id = props.user.role_id;
-        form.comapny_id = props.user.comapny_id;
+    if (props.bill && Object.keys(props.bill).length > 0) {
+        form.company_id = props.bill.company_id;
+        form.package_id = props.bill.package_id;
+        form.user_id = props.bill.user_id;
+        form.ip_address_id = props.bill.ip_address_id;
+        form.package_name = props.bill.package_name;
+        form.billing_month = props.bill.billing_month;
+        form.amount = props.bill.amount;
+        form.speed = props.bill.speed;
+        form.status = props.bill.status;
 
-        if (props.user.customer) {
-            form.address = props.user.customer.address || "";
-            form.phone = props.user.customer.phone || "";
-            form.floor = props.user.customer.floor || "";
-        } else {
-            form.address = "";
-            form.phone = "";
-            form.floor = "";
-        }
-
-        if (props.user.companies) {
-            props.user.companies.forEach((company) => {
-                form.company_id = company.id;
-            });
-        }
     } else {
-        form.name = "";
-        form.email = "";
-        form.password = "";
-        form.role_id = null;
         form.company_id = null;
-        form.address = "";
-        form.phone = "";
-        form.floor = "";
+        form.package_id = null;
+        form.user_id = null;
+        form.ip_address_id = null;
+        form.billing_month = "";
+        form.package_name = "";
+        form.amount = "";
+        form.speed = "";
+        form.status = "due";
     }
-    //console.log(form.role_id);
 });
 
-watch(() => form.role_id, (newRoleId) => {
-    showCustomerFields.value = (newRoleId === 4);  // Change the role ID here as needed
-    showNotCustomerFields.value = (newRoleId !== 4);
+watch(() => form.package_id, (newPackageId) => {
+    const selectedPackage = props.packages.find((packageItem) => packageItem.id === newPackageId);
+    if (selectedPackage) {
+        form.package_name = selectedPackage.name;
+        form.amount = selectedPackage.price;
+        form.speed = selectedPackage.speed;
+    }
 });
 
 const submit = () => (props.isUpdating ? updateResource() : addResource());
 const addResource = () => {
     // form.post("/ip_addresses");
-    form.post('/users', {
+    form.post('/bills', {
         onError: (errors) => {
             //console.log(errors) // Logs any validation errors
         }
     })
 };
-const updateResource = () => { console.log('inside update')
-    form.post(`/users/${props.user.id}`, {
+const updateResource = () => { //console.log('inside update')
+    form.post(`/bills/${props.bill.id}`, {
         onError: (errors) => {
             //console.log(errors) // Logs any validation errors
         }
