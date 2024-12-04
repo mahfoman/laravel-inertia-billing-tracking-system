@@ -57,9 +57,8 @@
                             id="ip_address_id"
                             v-model="form.ip_address_id"
                             class="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
-                            :class="{'border-red-500': errors.ip_address_id}"
-                        >
-                            <option v-for="ip_address in ip_addresses" :value="ip_address.id">{{ ip_address.ip_address }}</option>
+                            :class="{'border-red-500': errors.ip_address_id}">
+                            <option v-for="ip_address in combinedIpAddresses" :value="ip_address.id">{{ ip_address.ip_address }}</option>
                         </select>
                         <p v-if="errors.ip_address_id" class="text-red-500 text-xs mt-1">{{ errors.ip_address_id }}</p>
                     </div>
@@ -173,6 +172,10 @@ const props = defineProps({
         type: Object,
         default: null,
     },
+    unusedIpAddresses: {
+        type: Object,
+        default: null,
+    },
     months :{
         type: Array,
         default: null
@@ -273,6 +276,15 @@ watch(() => form.company_id, (newCompanyId) => {
 // Computed property for filtered users
 const filteredUsers = computed(() => {
     return dropDownUsers.filter(user => user.role_id !== 2); // filtering users for company who are not admin (2)
+});
+
+// dropdown IpAddresses processing
+const combinedIpAddresses = computed(() => {
+    // Adding the selected IP address to the list during editing
+    if( props.isUpdating ) {
+        return [props.bill.ip_address, ...props.unusedIpAddresses, ];
+    }
+    return props.unusedIpAddresses;
 });
 
 </script>

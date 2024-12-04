@@ -12,4 +12,9 @@ class IpAddress extends Model
     protected $fillable = [
         'ip_address'
     ];
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
 }

@@ -26,7 +26,8 @@ class BillController extends Controller
         $users = [];
         //dd($users);
         $packages = Package::all();
-        $ip_addresses = IpAddress::all();
+
+        $unusedIpAddresses = IpAddress::doesntHave('bills')->get();
 
         $currentYear = Carbon::now()->year;
         // Generating an array with 'YYYY-MM' format for the 12 months of the current year
@@ -35,7 +36,7 @@ class BillController extends Controller
         });
 //        dd($months);
 
-        return Inertia::render('Bill/Create', compact('companies', 'users', 'packages', 'ip_addresses', 'months'));
+        return Inertia::render('Bill/Create', compact('companies', 'users', 'packages', 'unusedIpAddresses' ,'months'));
     }
 
     public function store(Request $request)
@@ -52,11 +53,14 @@ class BillController extends Controller
     }
 
     public function edit(Bill $bill){
+        $bill->load('company', 'user', 'package', 'ip_address');
+
         $companies = Company::all();
         $users = User::whereNotIn('role_id', [1, 2, 3])->get();
         //dd($users);
         $packages = Package::all();
-        $ip_addresses = IpAddress::all();
+
+        $unusedIpAddresses = IpAddress::doesntHave('bills')->get();
 
         $currentYear = Carbon::now()->year;
         // Generating an array with 'YYYY-MM' format for the 12 months of the current year
@@ -65,7 +69,7 @@ class BillController extends Controller
         });
         $isUpdating = true;
 //        dd($months);
-        return Inertia::render('Bill/Create', compact('companies', 'users', 'packages', 'ip_addresses', 'months', 'bill', 'isUpdating'));
+        return Inertia::render('Bill/Create', compact('companies', 'users', 'packages', 'unusedIpAddresses' ,'months', 'bill', 'isUpdating'));
     }
 
     public function update(Request $request, Bill $bill){
