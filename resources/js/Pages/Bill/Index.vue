@@ -3,7 +3,7 @@
     <main class="flex-grow py-8">
         <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-5xl">
             <div class="flex justify-between items-center mb-5">
-                <h2 class="text-2xl font-bold text-gray-800">All Bills</h2>
+                <h2 class="text-2xl font-bold text-gray-800">Bills</h2>
                 <!-- Input fields for filters -->
                 <div class="flex space-x-2">
                     <!-- Date Range Picker -->
@@ -47,7 +47,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Example rows, replace with dynamic content as needed -->
                 <tr v-for="bill in bills.data" :key="bill.id">
                     <td class="py-2 px-4 border-b">{{ bill.id }}</td>
                     <td class="py-2 px-4 border-b">{{ bill.company.name }}</td>

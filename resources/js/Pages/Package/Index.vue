@@ -1,7 +1,7 @@
 <template>
 
     <main class="flex-grow py-8">
-        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
+        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-5xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">All Packages</h2>
                 <Link href="/packages/create" class="bg-gray-600 text-white px-3 py-2 font-semibold text-sm rounded hover:bg-gray-700">
@@ -9,14 +9,14 @@
                 </Link>
             </div>
             <table class="min-w-full bg-white">
-                <thead>
+                <thead class="bg-black text-white text-xs rounded-2xl">
                 <tr>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">ID</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Company Name</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Package Name</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Price</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Speed (MB) </th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Action</th>
+                    <th class="py-2 px-4 border-b text-left  ">ID</th>
+                    <th class="py-2 px-4 border-b text-left  ">Company Name</th>
+                    <th class="py-2 px-4 border-b text-left  ">Package Name</th>
+                    <th class="py-2 px-4 border-b text-left  ">Price</th>
+                    <th class="py-2 px-4 border-b text-left  ">Speed (MB)</th>
+                    <th class="py-2 px-4 border-b text-left  ">Action</th>
                 </tr>
                 </thead>
                 <tbody>

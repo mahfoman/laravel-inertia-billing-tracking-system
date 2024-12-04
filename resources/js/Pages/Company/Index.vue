@@ -1,7 +1,7 @@
 <template>
 
     <main class="flex-grow py-8">
-        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-4xl">
+        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-5xl">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold text-gray-800">Companies</h2>
                 <Link href="/companies/create" class="bg-gray-600 text-white px-3 py-2 font-semibold text-sm rounded hover:bg-gray-700">
@@ -9,20 +9,19 @@
                 </Link>
             </div>
             <table class="min-w-full bg-white">
-                <thead>
+                <thead class="bg-black text-white text-xs rounded-2xl">
                 <tr>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">ID</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Name</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Email</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Logo</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Website</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Phone</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Users</th>
-                    <th class="py-2 px-4 border-b text-left text-gray-600 font-semibold">Action</th>
+                    <th class="py-2 px-4 border-b text-left  ">ID</th>
+                    <th class="py-2 px-4 border-b text-left  ">Name</th>
+                    <th class="py-2 px-4 border-b text-left  ">Email</th>
+                    <th class="py-2 px-4 border-b text-left  ">Logo</th>
+                    <th class="py-2 px-4 border-b text-left  ">WebSite</th>
+                    <th class="py-2 px-4 border-b text-left  ">Phone</th>
+                    <th class="py-2 px-4 border-b text-left  ">Users</th>
+                    <th class="py-2 px-4 border-b text-left  ">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Example rows, replace with dynamic content as needed -->
                 <tr v-for="company in companies.data" :key="company.id">
                     <td class="py-2 px-4 border-b">{{ company.id }}</td>
                     <td class="py-2 px-4 border-b">{{ company.name }}</td>
