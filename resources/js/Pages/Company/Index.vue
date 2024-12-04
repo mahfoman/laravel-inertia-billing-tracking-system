@@ -32,7 +32,16 @@
                     </td>
                     <td class="py-2 px-4 border-b">{{ company.website }}</td>
                     <td class="py-2 px-4 border-b">{{ company.phone }}</td>
-                    <td class="py-2 px-4 border-b">Users</td>
+                    <td class="py-2 px-4 border-b">
+                        <a @click.prevent="openModal(company)" class="text-blue-500 hover:underline cursor-pointer">users</a>
+                        <CompanyUsersModal
+                            v-if="showModal"
+                            :company="selectedCompany"
+                            :dropDownUsers="dropDownUsers"
+                            :tableUsers="tableUsers"
+                            @close="showModal = false"
+                        />
+                    </td>
                     <td class="py-2 px-4 border-b">
                         <Link :href="`/companies/${company.id}/edit`" class="text-blue-500 mr-4"><i class="fas fa-edit"></i></Link>
                         <button @click="deleteResource(company.id)" class="text-red-600 hover:underline"><i class="fas fa-trash-alt"></i></button>
@@ -57,13 +66,22 @@
 <script setup>
 import { ref } from 'vue'
 import { Link, useForm } from "@inertiajs/vue3";
-import ConfirmDialog from '@/Components/ConfirmDialog.vue'
+import ConfirmDialog from '../../Components/ConfirmDialog.vue'
 import Pagination from "../../Components/Pagination.vue";
+import CompanyUsersModal from "../../Components/Company/CompanyUsersModal.vue";
+import axios from "axios";
+
 
 const showDeleteModal = ref(false)
 const resourceToDelete = ref(null)
 
-defineProps({
+const showModal = ref(false);
+
+const selectedCompany = ref(null);
+const dropDownUsers = ref([]);
+const tableUsers = ref([]);
+
+const props = defineProps({
     companies: {
         type: Object,
         default: () => [],
@@ -80,5 +98,16 @@ const deleteResource = (id) => {
 const confirmDelete = () => {
     form.delete(`companies/${resourceToDelete.value}`);
     showDeleteModal.value = false
+}
+const openModal = (company) => {
+    selectedCompany.value = company
+    showModal.value = true;
+
+    axios.get(`/companies/${company.id}/users`)
+        .then(res => {
+            //console.log(res.data)
+            dropDownUsers.value = res.data.dropDownUsers
+            tableUsers.value = res.data.tableUsers
+        })
 }
 </script>
