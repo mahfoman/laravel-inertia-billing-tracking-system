@@ -23,7 +23,7 @@ class BillController extends Controller
     public function create()
     {
         $companies = Company::all();
-        $users = User::whereNotIn('role_id', [1, 2, 3])->get();
+        $users = [];
         //dd($users);
         $packages = Package::all();
         $ip_addresses = IpAddress::all();

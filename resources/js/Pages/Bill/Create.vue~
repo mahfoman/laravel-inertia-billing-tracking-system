@@ -262,7 +262,7 @@ watch(() => form.company_id, (newCompanyId) => {
         .then(res => {
             dropDownUsers.splice(0, dropDownUsers.length, ...res.data.tableUsers);
             showCustomer.value = dropDownUsers.length > 0;
-
+            
             // for updating keeping the selected user even if company is changed
             if( props.isUpdating ) {
                 form.user_id = props.bill.user_id

@@ -22,7 +22,7 @@
                 </form>
 
                 <!-- company user list goes here in loop -->
-                <h2 class="mt-5 text-xl font-semibold mb-4">Company {{ company.name }} Users</h2>
+                <h2 class="mt-5 text-xl font-semibold mb-4"><span class="font-semibold">{{ company.name }}</span> Users</h2>
                 <table class="min-w-full bg-white">
                     <thead>
                     <tr>

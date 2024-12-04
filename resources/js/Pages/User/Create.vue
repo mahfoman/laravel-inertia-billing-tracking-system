@@ -1,7 +1,7 @@
 <template>
 
     <main class="flex-grow py-8">
-        <div class="container mx-auto max-w-4xl p-6 bg-white shadow-lg rounded-lg">
+        <div class="container mx-auto max-w-5xl p-6 bg-white shadow-lg rounded-lg">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">{{props.isUpdating ? 'Edit' : 'Add'}} User</h2>
             <form @submit.prevent="submit">
                 <!-- Name Input -->
